@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/custom.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Code focus -->
+		<link rel="stylesheet" href="lib/css/code-focus.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>CSS Layout</h1>
+					<h3 style="color: #b58900;">Minimální kuchařka</h3>
+					<p>
+						<small>Vytvořil <a href="http://lukasmlady.cz">Lukáš Mladý</a> / <a href="http://twitter.com/lukasmlady">@lukasmlady</a></small>
+					</p>
+				</section>
+
+				<section>
+          <h1>Co nás čeká?</h1>
+				</section>
+
+				<section>
+					<p class="fragment">Float</p>
+					<p class="fragment">Pozicování</p>
+					<p class="fragment">Table layout</p>
+					<p class="fragment">Inline block</p>
+					<p class="fragment">Flexbox</p>
+					<p class="fragment">Grid layout</p>
+				</section>
+
+				<section>
+          <h1>Float layout</h1>
+        </section>
+
+				<section>
+          <h3>CSS vlastnosti</h3>
+
+          <p>Aplikace obtékání:</p>
+
+          <pre><code data-trim contenteditable>
+.floater { float: left; }
+.floater { float: right; }
+.floater { float: none; }
+          </code></pre>
+
+          <p>Zrušení obtékání:</p>
+
+          <pre><code data-trim contenteditable>
+.after-floater { clear: left; }
+.after-floater { clear: right; }
+.after-floater { clear: both; }
+.after-floater { clear: none; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1,4,6"></span>
+          <span class="fragment" data-code-focus="2,5,6"></span>
+          <span class="fragment" data-code-focus="3,7"></span>
+				</section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Jednoduché na použití</p>
+          <p class="fragment u-textGreen">Lze vytvořit sloupcový layout</p>
+          <p class="fragment u-textRed">Nutnost zrušení obtékání pro následníky</p>
+          <p class="fragment u-textRed">Vertikální či horizontální zarovnání - ne-e</p>
+          <p class="fragment u-textRed">Nelze dosáhnout totožné výšky všech sloupců ve sloupcovém layoutu</p>
+        </section>
+
+				<section>
+          <h3>Clearfix (micro clearfix)</h3>
+
+          <pre><code data-trim contenteditable>
+.clearfix:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+          </code></pre>
+
+          <a href="http://nicolasgallagher.com/micro-clearfix-hack/">Zdroj: Nicolas Gallagher</a>
+				</section>
+
+				<section>
+          <h3>New block formatting context</h3>
+
+          <p>Souvisí s chováním elementů poblíž plovoucích prvků</p>
+          <blockquote>
+            „Floats, absolutely positioned elements, block containers (such as inline-blocks, table-cells, and
+            table-captions) that are not block boxes, and block boxes with ’overflow’ other than ’visible’
+            (except when that value has been propagated to the viewport) establish new block formatting contexts
+            for their contents.“
+          </blockquote>
+
+          <a href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting">Zdroj: w3.org</a>
+				</section>
+
+				<section>
+          <h3>New block formatting context</h3>
+
+          <ol>
+            <li>Plovoucí prvky.</li>
+            <li>Absolutně pozicované elementy (kde position je absolute nebo fixed).</li>
+            <li>Element s vlastností display a hodnotou inline-block, table-cell nebo table-caption.</li>
+            <li>Elementy s vlastností overflow jinou než visible.</li>
+            <li>Nově i elementy s vlastností display a hodnotou flex nebo inline-flex.</li>
+          </ol>
+				</section>
+
+        <section>
+          <h3>New block formatting context</h3>
+
+          <blockquote>
+            „In a block formatting context, each box’s left outer edge touches the left edge of the containing block
+            (for right-to-left formatting, right edges touch). This is true even in the presence of floats (although
+            a box’s line boxes may shrink due to the floats), unless the box establishes a new block formatting context
+            (in which case the box itself may become narrower due to the floats).“
+          </blockquote>
+
+          <a href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting">Zdroj: w3.org</a>
+        </section>
+
+        <section>
+          <div id="float-example-1">
+            <p class="u-textLeft">
+              <img data-src="images/cat.jpg">
+              <div class="u-textLeft">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolor error, inventore mollitia
+                obcaecati perspiciatis placeat quas! Accusamus cumque ipsum, iusto necessitatibus non perspiciatis
+                quisquam saepe sed sunt voluptatum! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </div>
+            </p>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="float-example-1">
+img {
+  float: left;
+  margin-right: 1em;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous" id="float-example-2" style="color: white;">
+            <div class="left">.left</div>
+            <div class="right">.right</div>
+            <div class="footer">.footer element</div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="float-example-2">
+div { height: 4em; }
+.left { float: left; width: 40%; background-color: #268bd2; }
+.right { float: right; width: 40%; background-color: #268bd2; }
+.footer { height: 6em; clear: both; background-color: #586e75; }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Pozicování</h1>
+        </section>
+
+        <section>
+          <h3>CSS vlastnosti</h3>
+
+          <pre><code data-trim contenteditable>
+.positioned { position: static; }
+.positioned { position: relative; }
+.positioned { position: absolute; }
+.positioned { position: fixed; }
+.positioned { position: sticky; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.positioned { top: 0; right: 0; bottom: 0; left: 0; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.positioned { z-index: 10; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+          <span class="fragment" data-code-focus="2"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="5"></span>
+          <span class="fragment" data-code-focus="6"></span>
+          <span class="fragment" data-code-focus="7"></span>
+        </section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Modální okna</p>
+          <p class="fragment u-textGreen">Fixed (sticky) header</p>
+          <p class="fragment u-textGreen">Dropdown</p>
+          <p class="fragment u-textGreen">Widgety typu slider či range</p>
+          <p class="fragment u-textRed">Obecně špatný pro běžný layout</p>
+        </section>
+
+        <section>
+          <h3>z-index</h3>
+
+          <img class="stretch" data-src="images/z-index.png">
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-relative" id="positioning-example-1" style="color: white; height: 10em; background-color: #586e75">
+            <div class="parent">
+              <div class="positioned">positioned</div>
+              <div class="non-positioned" style="background-color: #6c71c4">Non-positioned</div>
+            </div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="positioning-example-1">
+.positioned {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  height: 8em;
+  width: 8em;
+  background-color: #268bd2;
+}
+          </code></pre>
+        </section>
+
+        <!--<section>-->
+          <!--<div class="u-spacingEnormous u-relative" id="positioning-example-2" style="color: white; height: 10em; background-color: #586e75">-->
+            <!--<table class="table">-->
+              <!--<tr>-->
+                <!--<td class="table-cell element u-relative">-->
+                  <!--Buňka #1-->
+                  <!--<i class="icon u-textRed">X</i>-->
+                <!--</td>-->
+                <!--<td class="table-cell">Buňka #2</td>-->
+                <!--<td class="table-cell">Buňka #3</td>-->
+                <!--<td class="table-cell">Buňka #4</td>-->
+              <!--</tr>-->
+            <!--</table>-->
+          <!--</div>-->
+          <!--<pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="positioning-example-2">-->
+<!--.icon {-->
+  <!--position: absolute;-->
+  <!--bottom: 0;-->
+  <!--right: 0;-->
+<!--}-->
+          <!--</code></pre>-->
+        <!--</section>-->
+
+        <section>
+          <h1>Table layout</h1>
+        </section>
+
+        <section>
+          <h3>CSS vlastnosti</h3>
+
+          <pre><code data-trim contenteditable>
+.table { display: table; }
+.table-child { display: table-cell; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.table { table-layout: auto; }
+.table { table-layout: fixed; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+          <span class="fragment" data-code-focus="2"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+        </section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Horizontální i vertikální zarovnání</p>
+          <p class="fragment u-textGreen">Přirozeně roztažitelné elementy</p>
+          <p class="fragment u-textGreen">Sloupcový layout</p>
+          <p class="fragment u-textRed">Nutné obalující elementy</p>
+          <p class="fragment u-textRed">Obtížné udělat mezery mezi prvky</p>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="table-example-1" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="table-example-1">
+<div class="table">
+  <div class="table-cell">Cell #1</div>
+  <div class="table-cell">Cell #2</div>
+  <div class="table-cell">Cell #3</div>
+  <div class="table-cell">Cell #4</div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="table-example-1">
+.table {
+  display: table;
+  table-layout: auto;
+  background-color: #268bd2;
+}
+.table-cell {
+  display: table-cell;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Inline block</h1>
+        </section>
+
+        <section>
+          <h3>CSS vlastnosti</h3>
+
+          <pre><code data-trim contenteditable>
+.inline-block { display: inline-block; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+        </section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Horizontální i vertikální zarovnání relativně snadné</p>
+          <p class="fragment u-textGreen">Vhodné pro grid system</p>
+          <p class="fragment u-textRed">Potřeba odstranit mezery mezi elementy</p>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="inline-block-example-1" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="inline-block-example-1">
+<div class="parent">
+  <div class="item">Item #1</div>
+  <div class="item">Item #2</div>
+  <div class="item">Item #3</div>
+  <div class="item">Item #4</div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="inline-block-example-1">
+.parent {}
+.item {
+  display: inline-block;
+  background-color: #2aa198;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Flexbox</h1>
+        </section>
+
+        <section>
+          <h3>CSS vlastnosti</h3>
+
+          <pre><code data-trim contenteditable>
+.flexbox { display: flex; }
+.flexbox-inline { display: inline-flex; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.flexbox { flex-direction: row; }
+.flexbox { flex-wrap: wrap; }
+.flexbox { flex-flow: row wrap; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.flexbox { justify-content: center; }
+.flexbox { align-content: center; }
+.flexbox { align-items: center; }
+.flexbox-item { align-self: center; }
+.flexbox-item { margin: auto; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.flexbox-item { flex-grow: 1; }
+.flexbox-item { flex-shrink: 1; }
+.flexbox-item { flex-basis: 50px; }
+.flexbox-item { flex: 1 0 auto; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.flexbox-item { order: 4; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1-2"></span>
+
+          <span class="fragment" data-code-focus="3-5"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="5"></span>
+
+          <span class="fragment" data-code-focus="6-10"></span>
+          <span class="fragment" data-code-focus="6"></span>
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8"></span>
+          <span class="fragment" data-code-focus="9"></span>
+          <span class="fragment" data-code-focus="10"></span>
+
+          <span class="fragment" data-code-focus="11-14"></span>
+          <span class="fragment" data-code-focus="11"></span>
+          <span class="fragment" data-code-focus="12"></span>
+          <span class="fragment" data-code-focus="13"></span>
+          <span class="fragment" data-code-focus="14"></span>
+
+          <span class="fragment" data-code-focus="15"></span>
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/01.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/02.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/03.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/04.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/05.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/06.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/09.png">
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/10.png">
+        </section>
+
+        <section>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="flexbox-example-1">
+.flex { align-items: stretch }
+          </code></pre>
+          <img class="stretch" data-src="images/11.png">
+        </section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Flexibilní rozměry prvků</p>
+          <p class="fragment u-textGreen">Horizontální i vertikální zarovnání snadné</p>
+          <p class="fragment u-textGreen">Ideální pro layout</p>
+          <p class="fragment u-textRed">Složitá syntaxe</p>
+          <p class="fragment u-textRed">Stále slabší podpora prohlížeči</p>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="flexbox-example-1" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="flexbox-example-1">
+<div class="parent">
+  <div class="item">Item #1</div>
+  <div class="item">Item #2</div>
+  <div class="item">Item #3</div>
+  <div class="item">Item #4</div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="flexbox-example-1">
+.parent { display: flex; }
+.item {
+  flex: 1;
+  background-color: #2aa198;
+}
+          </code></pre>
+        </section>
+
+				<section>
+					<h2>Podpora prohlížeči</h2>
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Chrome</th>
+								<th>Safari</th>
+								<th>Firefox</th>
+								<th>Opera</th>
+								<th>IE</th>
+								<th>Android</th>
+								<th>iOS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2009</td>
+								<td>20-</td>
+								<td>3.1-6</td>
+								<td>2-21</td>
+								<td>-</td>
+								<td>-</td>
+								<td>2.1-4.3</td>
+								<td>3.2-6.1</td>
+							<tr>
+							<tr>
+								<td>2011</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td>10</td>
+								<td>-</td>
+								<td>-</td>
+							<tr>
+							<tr>
+								<td>2012</td>
+								<td>21+</td>
+								<td>6.1+</td>
+								<td>22+</td>
+								<td>12.1+</td>
+								<td>11</td>
+								<td>4.4+</td>
+								<td>7+</td>
+							<tr>
+						</tbody>
+					</table>
+				</section>
+
+        <section>
+          <h2>Flexbox dnes</h2>
+        </section>
+
+        <section>
+          <p class="fragment u-textRed">Neexistuje JS polyfill</p>
+          <p class="fragment u-textGreen">Table layout jako fallback</p>
+          <p class="fragment u-textGreen">Modernizr a ".flexbox" či ".flexbox-legacy" CSS třídy</p>
+          <p class="fragment">Neřešit IE9 a starší - pokud se to vyloženě nerozbije</p>
+          <p class="fragment">Ideálně používat abstraktní komponenty (grid)</p>
+        </section>
+
+        <section>
+          <h1>Grid layout</h1>
+        </section>
+
+        <section>
+          <h3>CSS vlastnosti</h3>
+
+          <pre><code data-trim contenteditable>
+.grid { display: grid; }
+.grid-inline { display: inline-grid; }
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.grid { grid-template-rows: 100px 1fr; }
+.grid { grid-template-columns: 100px 1fr 100px; }
+.grid {
+  grid-template-areas: "a b c"
+                       "d d d";
+}
+.grid {
+  grid-template: 100px 1fr 100px /
+                 "a b c" 100px
+                 "d d d" 1fr;
+}
+          </code></pre>
+
+          <pre><code data-trim contenteditable>
+.grid-item { grid-area: a; }
+          </code></pre>
+
+          <p>a mnoho dalších...</p>
+
+          <span class="fragment" data-code-focus="1-2"></span>
+
+          <span class="fragment" data-code-focus="3-13"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="5-8"></span>
+          <span class="fragment" data-code-focus="9-13"></span>
+
+          <span class="fragment" data-code-focus="14"></span>
+        </section>
+
+        <section>
+          <img class="stretch" data-src="images/grid/01.png">
+        </section>
+
+        <section>
+          <h3>Fakta</h3>
+          <p class="fragment u-textGreen">Zarovnání do flexibilní mřížky</p>
+          <p class="fragment u-textGreen">Flexibilní rozměry prvků</p>
+          <p class="fragment u-textGreen">Horizontální i vertikální zarovnání snadné</p>
+          <p class="fragment u-textGreen">Ideální pro celostránkový layout</p>
+          <p class="fragment u-textGreen">Ideální pro layout formulářů</p>
+          <p class="fragment u-textRed">Složitá syntaxe</p>
+          <p class="fragment u-textRed">Žádný prohlížeč nepodporuje</p>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="grid-example-1" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="grid-example-1">
+<div class="grid">
+  <div class="a">A</div>
+  <div class="b">B</div>
+  <div class="c">C</div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="grid-example-1">
+.grid {
+  display: grid;
+  height: 6em;
+  grid-template: 100px 1fr /
+                 "a b" 100px "c c" 1fr;
+}
+.a { grid-area: a; background-color: #dc322f; }
+.b { grid-area: b; background-color: #859900; }
+.c { grid-area: c; background-color: #268bd2; }
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Pár praktických příkladů</h1>
+        </section>
+
+        <section>
+          <h2>Celostránkový layout</h2>
+          <img class="stretch" data-src="images/examples/celostrankovy.png">
+        </section>
+
+        <section>
+          <h2>Float + position</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-1" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-1">
+<div>Navigace</div>
+<div class="wrapper">
+  <div class="main">Hlavní obsah</div>
+  <div class="side">Postranní panel</div>
+</div>
+<div>Patička</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-1">
+.wrapper { position: relative; z-index: 1; background-color: #073642; }
+.wrapper:before {
+  content: "";
+  position: absolute; z-index: -1; top: 0; left: 0; bottom: 0;
+  width: 200px;
+  background-color: #859900;
+}
+.wrapper:after { content: " "; display: table; clear: both; }
+.main { float: right; width: calc(100% - 200px); }
+.side { float: left; width: 200px; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8-13"></span>
+          <span class="fragment" data-code-focus="10"></span>
+          <span class="fragment" data-code-focus="14"></span>
+          <span class="fragment" data-code-focus="15"></span>
+          <span class="fragment" data-code-focus="16"></span>
+        </section>
+
+        <section>
+          <h2>Table layout</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-2" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-2">
+<div>Navigace</div>
+<div class="wrapper">
+  <div class="side">Postranní panel</div>
+  <div class="main">Hlavní obsah</div>
+</div>
+<div>Patička</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-2">
+.wrapper { display: table; width: 100%; }
+.main { display: table-cell; background-color: #073642; }
+.side { display: table-cell; width: 200px; background-color: #859900; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8"></span>
+          <span class="fragment" data-code-focus="9"></span>
+        </section>
+
+        <section>
+          <h2>Flexbox</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-3" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-3">
+<div>Navigace</div>
+<div class="wrapper">
+  <div class="main">Hlavní obsah</div>
+  <div class="side">Postranní panel</div>
+</div>
+<div>Patička</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-3">
+.wrapper { display: flex; }
+.main { flex: 1; background-color: #073642; }
+.side { width: 200px; order: -1; background-color: #859900; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8"></span>
+          <span class="fragment" data-code-focus="9"></span>
+        </section>
+
+        <section>
+          <h2>Grid layout</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-4" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-4">
+<div>Navigace</div>
+<div class="wrapper">
+  <div class="main">Hlavní obsah</div>
+  <div class="side">Postranní panel</div>
+</div>
+<div>Patička</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-4">
+.wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "side main";
+}
+.main { grid-area: main; background-color: #073642; }
+.side { grid-area: side; background-color: #859900; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="7-12"></span>
+          <span class="fragment" data-code-focus="9"></span>
+          <span class="fragment" data-code-focus="10"></span>
+          <span class="fragment" data-code-focus="11"></span>
+          <span class="fragment" data-code-focus="13"></span>
+          <span class="fragment" data-code-focus="14"></span>
+        </section>
+
+        <section>
+          <h2>Vystředění prvků</h2>
+          <img class="stretch" data-src="images/examples/vycentrovani.png">
+        </section>
+
+        <section>
+          <h2>Position</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-5" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-5">
+<div>
+  <p>Vycentrovaný prvek</p>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-5">
+div { position: relative; height: 6em; }
+p {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: auto;
+  width: 50%;
+  height: 60px; line-height: 60px;
+  text-align: center;
+  background-color: #268bd2;
+}
+          </code></pre>
+
+          <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="5-13"></span>
+          <span class="fragment" data-code-focus="6-7"></span>
+          <span class="fragment" data-code-focus="9-10"></span>
+          <span class="fragment" data-code-focus="8"></span>
+        </section>
+
+        <section>
+          <h2>Table layout</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-6" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-6">
+<div class="outer">
+  <div class="inner">
+    <p>Vycentrovaný prvek</p>
+  </div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-6">
+.outer { display: table; width: 100%; height: 6em; }
+.inner { display: table-cell; vertical-align: middle; }
+p {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  background-color: #268bd2;
+}
+          </code></pre>
+
+          <span class="fragment" data-code-focus="6"></span>
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8-13"></span>
+          <span class="fragment" data-code-focus="9"></span>
+        </section>
+
+        <section>
+          <h2>Flexbox</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingEnormous u-textLeft" id="examples-7" style="color: white; background-color: #586e75">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-7">
+<div class="first">
+  <p>Vycentrovaný prvek</p>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-7">
+/* První možnost */
+.first {
+  display: flex;
+  height: 4em;
+  justify-content: center;
+  align-items: center;
+}
+.first p { background-color: #268bd2; }
+/* Druhá možnost */
+.second { display: flex; height: 4em; }
+.second p { margin: auto; background-color: #268bd2; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="5-11"></span>
+          <span class="fragment" data-code-focus="13-14"></span>
+          <span class="fragment" data-code-focus="8-9"></span>
+          <span class="fragment" data-code-focus="14"></span>
+        </section>
+
+        <section>
+          <h2>Media object</h2>
+          <img class="stretch" data-src="images/examples/media-object.png">
+        </section>
+
+        <section>
+          <h2>Float</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingMedium u-textLeft" id="examples-8" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image" style="width: 150px; height: 150px; background-color: #859900;"></div>
+              <div class="content">Lorem ipsum dolor sit amet, consectetur.
+                <div class="media">
+                  <div class="image" style="width: 150px; height: 150px; background-color: #859900;"></div>
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                    distinctio, dolores fugiat ipsa odit sapiente unde.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-spacingEnormous u-textLeft" id="examples-8" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image-right" style="width: 150px; height: 150px; background-color: #859900;"></div>
+              <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                distinctio, dolores fugiat ipsa odit sapiente unde. At deleniti incidunt quos repellat veritatis.
+                Aliquid est perspiciatis sapiente. Aliquid est perspiciatis sapiente.
+              </div>
+            </div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-8">
+.media:after { content: " "; display: table; clear: both; }
+.media .image { float: left; margin-right: 10px; }
+.media .image-right { float: right; margin-left: 10px; }
+.media .content { overflow: hidden; background-color: #268bd2; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+          <span class="fragment" data-code-focus="2-3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+        </section>
+
+        <section>
+          <h2>Table layout</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingMedium u-textLeft" id="examples-9" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+              <div class="content">Lorem ipsum dolor sit amet, consectetur.
+                <div class="media">
+                  <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                    distinctio, dolores fugiat ipsa odit sapiente unde.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-spacingEnormous u-textLeft" id="examples-9" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                distinctio, dolores fugiat ipsa odit sapiente unde. At deleniti incidunt quos repellat veritatis.
+                Aliquid est perspiciatis sapiente. Aliquid est perspiciatis sapiente.
+              </div>
+              <div class="image-right"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+            </div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-9">
+.media { display: table; }
+.media .image { display: table-cell; padding-right: 10px; }
+.media .image-right { display: table-cell; padding-left: 10px; }
+.media .content { background-color: #268bd2; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+          <span class="fragment" data-code-focus="2-3"></span>
+        </section>
+
+        <section>
+          <h2>Flexbox</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingMedium u-textLeft" id="examples-10" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+              <div class="content">Lorem ipsum dolor sit amet, consectetur.
+                <div class="media">
+                  <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-spacingEnormous u-textLeft" id="examples-10" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image-right"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+              <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                distinctio, dolores fugiat ipsa odit sapiente unde.
+              </div>
+            </div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-10">
+.media { display: flex; }
+.media .image { margin-right: 10px; }
+.media .image-right { margin-left: 10px; order: 1; }
+.media .content { flex: 1; background-color: #268bd2; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+        </section>
+
+        <section>
+          <h2>Grid layout</h2>
+        </section>
+
+        <section>
+          <div class="u-spacingMedium u-textLeft" id="examples-11" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+              <div class="content">Lorem ipsum dolor sit amet, consectetur.
+                <div class="media">
+                  <div class="image"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="u-spacingEnormous u-textLeft" id="examples-11" style="color: white; background-color: #586e75">
+            <div class="media">
+              <div class="image-right"><div style="width: 150px; height: 150px; background-color: #859900;">&nbsp;</div></div>
+              <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium asperiores autem deleniti
+                distinctio, dolores fugiat ipsa odit sapiente unde.
+              </div>
+            </div>
+          </div>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-11">
+.media {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "image-left content image-right";
+}
+.media .image { margin-right: 10px; grid-area: image-left; }
+.media .image-right { margin-left: 10px; grid-area: image-right; }
+.media .content { grid-area: content; background-color: #268bd2; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="1-5"></span>
+          <span class="fragment" data-code-focus="2"></span>
+          <span class="fragment" data-code-focus="3"></span>
+          <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="4,6"></span>
+          <span class="fragment" data-code-focus="4,7"></span>
+          <span class="fragment" data-code-focus="4,8"></span>
+        </section>
+
+        <section>
+          <h2>Textové pole s tlačítkem</h2>
+          <img class="stretch" data-src="images/examples/formularove-prvky.png">
+        </section>
+
+        <section>
+          <h2>Float</h2>
+        </section>
+
+        <section>
+          <style>
+            #examples-12 .input-box-left input {
+              border: 0 none;
+              padding: 11px 10px 10px;
+              font-size: 1em;
+            }
+            #examples-12 button {
+              padding: 10px;
+              -webkit-appearance: none; border: 0 none;
+              font-size: 1em;
+            }
+          </style>
+          <div class="u-spacingMedium u-textLeft" id="examples-12" style="color: white;">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-12">
+<div class="input-box">
+  <div class="input-box-right">
+    <button>Tlačítko</button>
+  </div>
+  <div class="input-box-left">
+    <input type="text" value="Text hledání...">
+  </div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-12">
+.input-box:after { content: " "; display: table; clear: both; }
+.input-box-left { overflow: hidden; }
+.input-box-left input { box-sizing: border-box; width: 100%; }
+.input-box-right { float: right; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="9"></span>
+          <span class="fragment" data-code-focus="10"></span>
+          <span class="fragment" data-code-focus="11"></span>
+          <span class="fragment" data-code-focus="12"></span>
+        </section>
+
+        <section>
+          <h2>Table layout</h2>
+        </section>
+
+        <section>
+          <style>
+            #examples-13 .input-box input {
+              border: 0 none;
+              padding: 11px 10px 10px;
+              font-size: 1em;
+            }
+            #examples-13 button {
+              padding: 10px;
+              -webkit-appearance: none; border: 0 none;
+              font-size: 1em;
+            }
+          </style>
+          <div class="u-spacingMedium u-textLeft" id="examples-13" style="color: white;">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-13">
+<div class="input-box">
+  <input type="text" value="Text hledání...">
+  <div class="input-box-btn">
+    <button>Tlačítko</button>
+  </div>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-13">
+.input-box { display: table; width: 100%; }
+.input-box input {
+  box-sizing: border-box;
+  display: table-cell;
+  width: 100%;
+}
+.input-box-btn { display: table-cell; width: 1%; white-space: nowrap; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="7"></span>
+          <span class="fragment" data-code-focus="8-12"></span>
+          <span class="fragment" data-code-focus="13"></span>
+        </section>
+
+        <section>
+          <h2>Flexbox</h2>
+        </section>
+
+        <section>
+          <style>
+            #examples-14 .input-box input {
+              border: 0 none;
+              padding: 11px 10px 10px;
+              font-size: 1em;
+            }
+            #examples-14 button {
+              padding: 10px;
+              -webkit-appearance: none; border: 0 none;
+              font-size: 1em;
+            }
+          </style>
+          <div class="u-spacingMedium u-textLeft" id="examples-14" style="color: white;">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-14">
+<div class="input-box">
+  <input type="text" value="Text hledání...">
+  <button>Tlačítko</button>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-14">
+.input-box { display: flex; }
+.input-box input { flex: 1; }
+.input-box button { order: 1; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="5"></span>
+          <span class="fragment" data-code-focus="6"></span>
+          <span class="fragment" data-code-focus="7"></span>
+        </section>
+
+        <section>
+          <h2>Grid layout</h2>
+        </section>
+
+        <section>
+          <style>
+            #examples-15 .input-box input {
+              border: 0 none;
+              padding: 11px 10px 10px;
+              font-size: 1em;
+            }
+            #examples-15 button {
+              padding: 10px;
+              -webkit-appearance: none; border: 0 none;
+              font-size: 1em;
+            }
+          </style>
+          <div class="u-spacingMedium u-textLeft" id="examples-15" style="color: white;">
+          </div>
+          <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-15">
+<div class="input-box">
+  <input type="text" value="Text hledání...">
+  <button>Tlačítko</button>
+</div>
+          </code></pre>
+          <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="examples-15">
+.input-box {
+  display: grid;
+  grid-template: auto 1fr auto / "btn-left input btn-right" 1fr;
+}
+.input-box input { grid-area: input; width: 100%; }
+.input-box button { grid-area: btn-right; }
+          </code></pre>
+
+          <span class="fragment" data-code-focus="5-8"></span>
+          <span class="fragment" data-code-focus="9"></span>
+          <span class="fragment" data-code-focus="10"></span>
+        </section>
+
+				<section>
+					<h1>Odkazy</h1>
+				</section>
+
+				<section>
+					<h2>Float</h2>
+
+          <ul>
+            <li><a href="http://www.stubbornella.org/content/2009/07/23/overflow-a-secret-benefit">http://www.stubbornella.org/content/2009/07/23/overflow-a-secret-benefit</a></li>
+          </ul>
+				</section>
+
+				<section>
+					<h2>Position</h2>
+
+          <ul>
+            <li><a href="http://philipwalton.com/articles/what-no-one-told-you-about-z-index">http://philipwalton.com/articles/what-no-one-told-you-about-z-index</a></li>
+          </ul>
+				</section>
+
+				<section>
+					<h2>Flexbox</h2>
+
+          <ul>
+            <li><a href="https://github.com/philipwalton/solved-by-flexbox">https://github.com/philipwalton/solved-by-flexbox</a></li>
+            <li><a href="https://github.com/philipwalton/flexbugs">https://github.com/philipwalton/flexbugs</a></li>
+            <li><a href="http://chriswrightdesign.com/experiments/using-flexbox-today">http://chriswrightdesign.com/experiments/using-flexbox-today</a></li>
+          </ul>
+				</section>
+
+				<section class="u-textLeft">
+					<h1>Konec...nebo začátek?</h1>
+          <p>
+            <small>Vytvořil <a href="http://lukasmlady.cz">Lukáš Mladý</a> / <a href="mailto:mladylukas@gmail.com">mladylukas@gmail.com</a> / <a href="http://twitter.com/lukasmlady">@lukasmlady</a></small>
+          </p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/prefixfree.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }},
+					{ src: 'plugin/code-focus/code-focus.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { RevealCodeFocus(); }},
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/live-coding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+				]
+			});
+
+      Reveal.configure({
+        keyboard: {
+          85: 'layout' // updates layout when you press "u" key.
+        }
+      });
+		</script>
+
+	</body>
+</html>
