@@ -47,25 +47,61 @@
 					<h1>CSS Layout</h1>
 					<h3 style="color: #b58900;">Minimální kuchařka</h3>
 					<p>
-						<small>Vytvořil <a href="http://lukasmlady.cz">Lukáš Mladý</a> / <a href="http://twitter.com/lukasmlady">@lukasmlady</a></small>
+            <small>
+              Vytvořil
+              <a href="http://lukasmlady.cz">Lukáš Mladý</a>
+              /
+              <a href="mailto:mladylukas@gmail.com">mladylukas@gmail.com</a>
+              /
+              <a href="http://twitter.com/lukasmlady">@lukasmlady</a>
+              /
+              <a href="http://www.pond5.com">pond5.com</a>
+            </small>
 					</p>
 				</section>
 
 				<section>
           <h1>Co nás čeká?</h1>
+          <p>
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/conev.png">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
+            <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
+          </p>
 				</section>
 
-				<section>
-					<p class="fragment">Float</p>
-					<p class="fragment">Pozicování</p>
-					<p class="fragment">Table layout</p>
-					<p class="fragment">Inline block</p>
-					<p class="fragment">Flexbox</p>
-					<p class="fragment">Grid layout</p>
+				<section class="u-textBase3">
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+            Float
+          </p>
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
+            Pozicování
+          </p>
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
+            Table layout
+          </p>
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/conev.png">
+            Inline block
+          </p>
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
+            Flexbox
+          </p>
+					<p class="u-flex u-alignICenter u-justifyCCenter fragment">
+            <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
+            Grid layout
+          </p>
 				</section>
 
 				<section>
           <h1>Float layout</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/pizza-icon.png">
         </section>
 
 				<section>
@@ -98,7 +134,7 @@
           <p class="fragment u-textGreen">Jednoduché na použití</p>
           <p class="fragment u-textGreen">Lze vytvořit sloupcový layout</p>
           <p class="fragment u-textRed">Nutnost zrušení obtékání pro následníky</p>
-          <p class="fragment u-textRed">Vertikální či horizontální zarovnání - ne-e</p>
+          <p class="fragment u-textRed">Vertikální zarovnání - ne-e</p>
           <p class="fragment u-textRed">Nelze dosáhnout totožné výšky všech sloupců ve sloupcovém layoutu</p>
         </section>
 
@@ -180,16 +216,29 @@ img {
             <div class="right">.right</div>
             <div class="footer">.footer element</div>
           </div>
+
+          <style>
+            #float-example-2 .left {
+              background-color: #2aa198;
+            }
+            #float-example-2 .right {
+              background-color: #6c71c4;
+            }
+            #float-example-2 .footer {
+              background-color: #268bd2;
+            }
+          </style>
           <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="float-example-2">
 div { height: 4em; }
-.left { float: left; width: 40%; background-color: #268bd2; }
-.right { float: right; width: 40%; background-color: #268bd2; }
-.footer { height: 6em; clear: both; background-color: #586e75; }
+.left { float: left; width: 40%; }
+.right { float: right; width: 40%; }
+.footer { height: 6em; clear: both; }
           </code></pre>
         </section>
 
         <section>
           <h1>Pozicování</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/guava-icon.png">
         </section>
 
         <section>
@@ -236,12 +285,20 @@ div { height: 4em; }
         </section>
 
         <section>
-          <div class="u-spacingEnormous u-relative" id="positioning-example-1" style="color: white; height: 10em; background-color: #586e75">
+          <div class="u-spacingEnormous u-relative" id="positioning-example-1" style="color: white; height: 8em; background-color: #586e75">
             <div class="parent">
               <div class="positioned">positioned</div>
               <div class="non-positioned" style="background-color: #6c71c4">Non-positioned</div>
             </div>
           </div>
+          <style>
+            #positioning-example-1 .positioned {
+              background-color: #268bd2;
+            }
+            #positioning-example-1 .non-positioned {
+              background-color: #6c71c4;
+            }
+          </style>
           <pre><code data-trim contenteditable class="css liveCoding" data-livecoding-id="positioning-example-1">
 .positioned {
   position: relative;
@@ -249,9 +306,8 @@ div { height: 4em; }
   right: auto;
   bottom: auto;
   left: auto;
-  height: 8em;
-  width: 8em;
-  background-color: #268bd2;
+  height: 6em;
+  width: 6em;
 }
           </code></pre>
         </section>
@@ -281,6 +337,7 @@ div { height: 4em; }
 
         <section>
           <h1>Table layout</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/apple-icon.png">
         </section>
 
         <section>
@@ -288,6 +345,7 @@ div { height: 4em; }
 
           <pre><code data-trim contenteditable>
 .table { display: table; }
+.table-child { display: table-row; }
 .table-child { display: table-cell; }
           </code></pre>
 
@@ -300,6 +358,7 @@ div { height: 4em; }
           <span class="fragment" data-code-focus="2"></span>
           <span class="fragment" data-code-focus="3"></span>
           <span class="fragment" data-code-focus="4"></span>
+          <span class="fragment" data-code-focus="5"></span>
         </section>
 
         <section>
@@ -312,6 +371,20 @@ div { height: 4em; }
         </section>
 
         <section>
+          <style>
+            #table-example-1 .table-cell:first-child {
+              background-color: #2aa198;
+            }
+            #table-example-1 .table-cell:nth-child(2) {
+              background-color: #6c71c4;
+            }
+            #table-example-1 .table-cell:nth-child(3) {
+              background-color: #268bd2;
+            }
+            #table-example-1 .table-cell:nth-child(4) {
+              background-color: #d33682;
+            }
+          </style>
           <div class="u-spacingEnormous u-textLeft" id="table-example-1" style="color: white; background-color: #586e75">
           </div>
           <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="table-example-1">
@@ -326,7 +399,6 @@ div { height: 4em; }
 .table {
   display: table;
   table-layout: auto;
-  background-color: #268bd2;
 }
 .table-cell {
   display: table-cell;
@@ -336,6 +408,7 @@ div { height: 4em; }
 
         <section>
           <h1>Inline block</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/conev.png">
         </section>
 
         <section>
@@ -356,6 +429,20 @@ div { height: 4em; }
         </section>
 
         <section>
+          <style>
+            #inline-block-example-1 .item:first-child {
+              background-color: #2aa198;
+            }
+            #inline-block-example-1 .item:nth-child(2) {
+              background-color: #6c71c4;
+            }
+            #inline-block-example-1 .item:nth-child(3) {
+              background-color: #268bd2;
+            }
+            #inline-block-example-1 .item:nth-child(4) {
+              background-color: #d33682;
+            }
+          </style>
           <div class="u-spacingEnormous u-textLeft" id="inline-block-example-1" style="color: white; background-color: #586e75">
           </div>
           <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="inline-block-example-1">
@@ -370,13 +457,13 @@ div { height: 4em; }
 .parent {}
 .item {
   display: inline-block;
-  background-color: #2aa198;
 }
           </code></pre>
         </section>
 
         <section>
           <h1>Flexbox</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/meat-icon.png">
         </section>
 
         <section>
@@ -484,6 +571,20 @@ div { height: 4em; }
         </section>
 
         <section>
+          <style>
+            #flexbox-example-1 .item:first-child {
+              background-color: #2aa198;
+            }
+            #flexbox-example-1 .item:nth-child(2) {
+              background-color: #6c71c4;
+            }
+            #flexbox-example-1 .item:nth-child(3) {
+              background-color: #268bd2;
+            }
+            #flexbox-example-1 .item:nth-child(4) {
+              background-color: #d33682;
+            }
+          </style>
           <div class="u-spacingEnormous u-textLeft" id="flexbox-example-1" style="color: white; background-color: #586e75">
           </div>
           <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="flexbox-example-1">
@@ -561,12 +662,14 @@ div { height: 4em; }
           <p class="fragment u-textRed">Neexistuje JS polyfill</p>
           <p class="fragment u-textGreen">Table layout jako fallback</p>
           <p class="fragment u-textGreen">Modernizr a ".flexbox" či ".flexbox-legacy" CSS třídy</p>
+          <p class="fragment u-textGreen">Mobilní prohlížeče podporují - responsive design</p>
           <p class="fragment">Neřešit IE9 a starší - pokud se to vyloženě nerozbije</p>
           <p class="fragment">Ideálně používat abstraktní komponenty (grid)</p>
         </section>
 
         <section>
           <h1>Grid layout</h1>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons-big/cherry2-icon.png">
         </section>
 
         <section>
@@ -624,6 +727,17 @@ div { height: 4em; }
         </section>
 
         <section>
+          <style>
+            #grid-example-1 .a {
+              background-color: #dc322f;
+            }
+            #grid-example-1 .b {
+              background-color: #859900;
+            }
+            #grid-example-1 .c {
+              background-color: #268bd2;
+            }
+          </style>
           <div class="u-spacingEnormous u-textLeft" id="grid-example-1" style="color: white; background-color: #586e75">
           </div>
           <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="grid-example-1">
@@ -640,14 +754,20 @@ div { height: 4em; }
   grid-template: 100px 1fr /
                  "a b" 100px "c c" 1fr;
 }
-.a { grid-area: a; background-color: #dc322f; }
-.b { grid-area: b; background-color: #859900; }
-.c { grid-area: c; background-color: #268bd2; }
+.a { grid-area: a; }
+.b { grid-area: b; }
+.c { grid-area: c; }
           </code></pre>
         </section>
 
         <section>
           <h1>Pár praktických příkladů</h1>
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/conev.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
         </section>
 
         <section>
@@ -657,6 +777,8 @@ div { height: 4em; }
 
         <section>
           <h2>Float + position</h2>
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
         </section>
 
         <section>
@@ -665,8 +787,8 @@ div { height: 4em; }
           <pre><code data-trim contenteditable class="xml liveCoding" data-livecoding-id="examples-1">
 <div>Navigace</div>
 <div class="wrapper">
-  <div class="main">Hlavní obsah</div>
   <div class="side">Postranní panel</div>
+  <div class="main">Hlavní obsah</div>
 </div>
 <div>Patička</div>
           </code></pre>
@@ -679,7 +801,7 @@ div { height: 4em; }
   background-color: #859900;
 }
 .wrapper:after { content: " "; display: table; clear: both; }
-.main { float: right; width: calc(100% - 200px); }
+.main { display: table-cell; }
 .side { float: left; width: 200px; }
           </code></pre>
 
@@ -693,6 +815,7 @@ div { height: 4em; }
 
         <section>
           <h2>Table layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
         </section>
 
         <section>
@@ -719,6 +842,7 @@ div { height: 4em; }
 
         <section>
           <h2>Flexbox</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
         </section>
 
         <section>
@@ -745,6 +869,7 @@ div { height: 4em; }
 
         <section>
           <h2>Grid layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
         </section>
 
         <section>
@@ -784,6 +909,7 @@ div { height: 4em; }
 
         <section>
           <h2>Position</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
         </section>
 
         <section>
@@ -816,6 +942,7 @@ p {
 
         <section>
           <h2>Table layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
         </section>
 
         <section>
@@ -847,6 +974,7 @@ p {
 
         <section>
           <h2>Flexbox</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
         </section>
 
         <section>
@@ -884,6 +1012,7 @@ p {
 
         <section>
           <h2>Float</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
         </section>
 
         <section>
@@ -925,6 +1054,7 @@ p {
 
         <section>
           <h2>Table layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
         </section>
 
         <section>
@@ -965,6 +1095,7 @@ p {
 
         <section>
           <h2>Flexbox</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
         </section>
 
         <section>
@@ -1004,6 +1135,7 @@ p {
 
         <section>
           <h2>Grid layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
         </section>
 
         <section>
@@ -1056,6 +1188,7 @@ p {
 
         <section>
           <h2>Float</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
         </section>
 
         <section>
@@ -1098,6 +1231,7 @@ p {
 
         <section>
           <h2>Table layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
         </section>
 
         <section>
@@ -1140,6 +1274,7 @@ p {
 
         <section>
           <h2>Flexbox</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
         </section>
 
         <section>
@@ -1176,6 +1311,7 @@ p {
 
         <section>
           <h2>Grid layout</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
         </section>
 
         <section>
@@ -1219,6 +1355,7 @@ p {
 
 				<section>
 					<h2>Float</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
 
           <ul>
             <li><a href="http://www.stubbornella.org/content/2009/07/23/overflow-a-secret-benefit">http://www.stubbornella.org/content/2009/07/23/overflow-a-secret-benefit</a></li>
@@ -1227,6 +1364,7 @@ p {
 
 				<section>
 					<h2>Position</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
 
           <ul>
             <li><a href="http://philipwalton.com/articles/what-no-one-told-you-about-z-index">http://philipwalton.com/articles/what-no-one-told-you-about-z-index</a></li>
@@ -1235,6 +1373,7 @@ p {
 
 				<section>
 					<h2>Flexbox</h2>
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
 
           <ul>
             <li><a href="https://github.com/philipwalton/solved-by-flexbox">https://github.com/philipwalton/solved-by-flexbox</a></li>
@@ -1243,10 +1382,45 @@ p {
           </ul>
 				</section>
 
+				<section>
+					<h2>Všechny layouty</h2>
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/conev.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
+
+          <ul>
+            <li><a href="https://github.com/lukasmlady/moznosti-vyuziti-layoutu-css/raw/master/index.pdf">
+              https://github.com/lukasmlady/moznosti-vyuziti-layoutu-css/raw/master/index.pdf
+            </a></li>
+          </ul>
+				</section>
+
 				<section class="u-textLeft">
 					<h1>Konec...nebo začátek?</h1>
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/pizza-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/guava-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/apple-icon.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/conev.png">
+          <img class="u-outdentRegular" style="border: 0; margin: 0; background-color: transparent;" src="images/icons/meat-icon.png">
+          <img style="border: 0; margin: 0; background-color: transparent;" src="images/icons/cherry2-icon.png">
           <p>
-            <small>Vytvořil <a href="http://lukasmlady.cz">Lukáš Mladý</a> / <a href="mailto:mladylukas@gmail.com">mladylukas@gmail.com</a> / <a href="http://twitter.com/lukasmlady">@lukasmlady</a></small>
+            <small>
+              Vytvořil
+              <a href="http://lukasmlady.cz">Lukáš Mladý</a>
+              /
+              <a href="mailto:mladylukas@gmail.com">mladylukas@gmail.com</a>
+              /
+              <a href="http://twitter.com/lukasmlady">@lukasmlady</a>
+              /
+              <a href="http://www.pond5.com">pond5.com</a>
+            </small>
+          </p>
+          <p class="u-textYellow fragment">
+            Pond5 najímá frontend vývojáře! Vizte
+            <a class="u-textYellow" href="https://jobs.lever.co/pond5/36ad055f-0667-4826-acf8-fee05506b198">popis pozice</a>.
           </p>
 				</section>
 
