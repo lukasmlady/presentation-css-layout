@@ -2345,10 +2345,13 @@ body {
   line-height: 1 !important; }
 
 .u-textGreen {
-  color: #859900; }
+  color: #859900 !important; }
 
 .u-textRed {
-  color: #dc322f; }
+  color: #dc322f !important; }
 
 .u-textYellow {
-  color: #b58900; }
+  color: #b58900 !important; }
+
+.u-textBase3 {
+  color: #fdf6e3 !important; }
